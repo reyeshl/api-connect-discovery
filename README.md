@@ -11,4 +11,5 @@ selecting all views from specific schema.
 select field1, field2.
 # Model generation from stored procedure
 CALL procname, parameters
-# Model generation from multiple house
+# Model generation from multiple sources
+
