@@ -17,7 +17,7 @@ IBM API Connect may not like schema-less models, but they are very dynamic.
 Generating models from views just add the property   {"views":true} to the options in the call back function. 
 
 
-# Model generation from RAW sql in Oracle
+# Model generation from RAW SQL in Oracle
 oracle loopback connector is based on  ORACLEDB  nodejs library. 
 Adding a model from plain sql is very simpel as    modifying the modelname.js file as adding mixins.
 updating this libray with one example later. 
