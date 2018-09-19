@@ -4,32 +4,33 @@
 
 module.exports = function(app, callback) {
 
-  var localPath  = require('path');
-  var localFileSystem  = require('fs');
+  var localPath = require('path');
+  var localFileSystem = require('fs');
   var modelStoragePath = localPath.resolve(__dirname, '../../common/models');
-
   var dataSource = app.dataSources.oracleds;
 
-  function schemaDiscoveryCallBack(err, schema) {
-    if (schema) {
-      console.log("Discovering" + schema.name);
-      var outputName = modelStoragePath + '/' + schema.name + '.json';
+  function schemaDiscoveryCallBack(err, returnedSchema) {
+    if (returnedSchema) {
+      console.log('Discovering' + returnedSchema.name);
+      var outputName = modelStoragePath + '/' + returnedSchema.name + '.json';
       // writing JSON 3 spaces for better readability
-      localFileSystem.writeFile(outputName, JSON.stringify(schema, null, 3), function(err) {
+      localFileSystem.writeFile(outputName, JSON.stringify(returnedSchema, null, 3), function(err) {
         if (err) {
           console.log(err);
         } else {
-          console.log("model def saved as : " + outputName);
+          console.log('model def saved as : ' + outputName);
         }
       });
     }
-    if (err) {       console.error( 'Error ocurred while discovering tables/view ' ,  err);
-      return
+    if (err) {
+      console.error('Error ocurred while discovering tables/view ', err);
+      return;
     }
-    return callback();;
+    return callback();
   }
+
   // Other options can be  {relations:true}, to follow PK, FK relationships.
-  let discoveryOptions = {schema: 'HR', views:true};
+  let discoveryOptions = {schema: 'HR', views: true};
 
 // testing it with a view ,
   dataSource.discoverSchema('EVIEW', discoveryOptions, schemaDiscoveryCallBack);
